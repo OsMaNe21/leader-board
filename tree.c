@@ -22,10 +22,10 @@ Team* loadFromFile(Team* root, FILE* file, int teamCount);
 void freeTree(Team* root);
 
 int main() {
-    Team* root = NULL; // BST'nin kök düğümü
+    Team* root = NULL; 
     int choice;
 
-    // Load data from file at startup
+    
     FILE* file = fopen("leaderboard.dat", "rb");
     if (file != NULL) {
         int teamCount;
@@ -82,7 +82,7 @@ int main() {
     return 0;
 }
 
-// Yeni bir takım oluşturur
+
 Team* createTeam(char* name) {
     Team* newTeam = (Team*)malloc(sizeof(Team));
     strcpy(newTeam->name, name);
@@ -94,7 +94,7 @@ Team* createTeam(char* name) {
     return newTeam;
 }
 
-// Takımı BST'ye ekler
+
 Team* insertTeam(Team* root, char* name) {
     if (root == NULL) {
         return createTeam(name);
@@ -109,7 +109,7 @@ Team* insertTeam(Team* root, char* name) {
     return root;
 }
 
-// Takımı BST içinde bulur
+
 Team* findTeam(Team* root, char* name) {
     if (root == NULL || strcmp(root->name, name) == 0) {
         return root;
@@ -121,7 +121,7 @@ Team* findTeam(Team* root, char* name) {
     }
 }
 
-// Maç sonucunu günceller
+
 void updateMatch(Team* root) {
     char team1[50], team2[50];
     int goals1, goals2;
@@ -160,13 +160,13 @@ void updateMatch(Team* root) {
     printf("Match result updated successfully!\n");
 }
 
-// Liderlik tablosunu gösterir (in-order traversal)
+
 void displayLeaderboard(Team* root) {
     printf("\n%-20s %-10s %-10s %-10s\n", "Team", "Points", "Scored", "Conceded");
     displayInOrder(root);
 }
 
-// In-order traversal (alfabetik sırada takımları yazdırır)
+
 void displayInOrder(Team* root) {
     if (root == NULL) {
         return;
@@ -177,7 +177,7 @@ void displayInOrder(Team* root) {
     displayInOrder(root->right);
 }
 
-// Ağacı ve düğümleri dosyaya yazar (pre-order traversal)
+
 void saveToFile(Team* root, FILE* file) {
     if (root == NULL) {
         return;
@@ -187,7 +187,7 @@ void saveToFile(Team* root, FILE* file) {
     saveToFile(root->right, file);
 }
 
-// Dosyadan ağacı yükler
+
 Team* loadFromFile(Team* root, FILE* file, int teamCount) {
     for (int i = 0; i < teamCount; i++) {
         Team temp;
@@ -201,7 +201,7 @@ Team* loadFromFile(Team* root, FILE* file, int teamCount) {
     return root;
 }
 
-// Belleği serbest bırakır (ağaç düğümlerini temizler)
+
 void freeTree(Team* root) {
     if (root == NULL) {
         return;
